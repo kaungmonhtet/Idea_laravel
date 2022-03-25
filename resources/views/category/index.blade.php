@@ -38,17 +38,18 @@
             </tr>
             @foreach ($categories as $key => $category)
             <tr>
-                <td>{{ $key + 1 }}</td>
+                <td>{{ $categories->firstItem() + $key }}</td>
                 <td>{{ $category->code }}</td>
                 <td>{{ $category->description }}</td>
                 <td>
-                    <a class="btn btn-primary btn-sm btn-light category_edit" data-edit="{{$category}}" data-toggle="modal" data-target="#editModal">
-                    <span class="fa fa-edit fa-lg text-primary"></span></a>
+                    <a class="btn btn-primary btn-sm category_edit" data-edit="{{$category}}" data-toggle="modal" data-target="#editModal">
+                    <span class="fa fa-edit"></span></a>
                     <button type="button" class="btn btn-danger btn-sm open_delete" data-toggle="modal" data-id="{{$category->id}}" data-target="#modal_delete"><span class="fa fa-trash"></span></button>
                 </td>
             </tr>
             @endforeach
         </table>
+        {{$categories->links('pagination::bootstrap-4')}}
     </div>
 </div>
 <!-- Add Record  Modal -->

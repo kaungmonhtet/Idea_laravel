@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::get();
+        $users = User::paginate(5);
 
         return view('user.index',compact('users'));
     }
@@ -56,7 +56,7 @@ class UserController extends Controller
 
         User::create($data);
 
-        return redirect()->route('user.index')->with('success', 'Saved Successfully.');
+        return redirect()->route('users.index')->with('success', 'Saved Successfully.');
     }
 
     /**
@@ -103,9 +103,6 @@ class UserController extends Controller
             "staff_type" => ['nullable'],
             "role" => ['required'],
         ]);
-
-
-        // $data['last_modified_by'] = Auth::id();
 
         $user->update($data);
 

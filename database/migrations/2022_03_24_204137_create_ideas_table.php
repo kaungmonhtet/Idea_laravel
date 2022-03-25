@@ -18,13 +18,15 @@ class CreateIdeasTable extends Migration
             $table->integer('comment_id')->nullable();
             $table->integer('category_id');
             $table->integer('user_id');
+            $table->integer('department_id');
             $table->integer('academic_year_id');
             $table->string('title');
-            $table->string('description');
+            $table->text('description');
             $table->string('document_url')->nullable();
             $table->boolean('annonymous');
             $table->integer('last_modified_by')->nullable();
             $table->integer('created_by')->nullable();
+            $table->integer('view_count')->default(0);
             $table->timestamps();
         });
     }

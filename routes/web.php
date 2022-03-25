@@ -46,3 +46,7 @@ Route::resource('ideas', IdeaController::class);
 Route::post('/comment/store', [CommentController::class,'store'])->name('comment.add');
 Route::post('/reaction/store', [CommentController::class,'reactionStore'])->name('reaction.add');
 Route::post('get-closure-date/', [AcademicController::class,'getClosure'])->name('get-closure-date');
+Route::get('reports', [AcademicController::class,'getClosure'])->name('reports.index');
+Route::get('ideas-by-closure', [IdeaController::class,'ideaListByFCDate'])->name('idea.closure');
+Route::get('download-zip', [IdeaController::class,'downloadZip'])->name('download-zip');
+// Route::get('reports', [AcademicController::class,'getClosure'])->name('reports.index');

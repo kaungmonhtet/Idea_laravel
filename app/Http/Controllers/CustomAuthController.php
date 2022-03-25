@@ -61,7 +61,7 @@ class CustomAuthController extends Controller
 
         User::create($data);
 
-        return redirect()->route('categories.index');
+        return redirect()->route('users.index');
     }
  
  

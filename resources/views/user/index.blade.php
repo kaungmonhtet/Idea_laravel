@@ -11,11 +11,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="text-center mt-5">
-                    <h2>Academic Year List</h2>
+                    <h2>User List</h2>
                 </div>
             </div>
             <div class="col-md-12 text-end mt-4">
-                <a class="btn btn-primary m-1 float-right" href="{{ route('register-user') }}">Add New User</a>
+                <a class="btn btn-primary m-1 float-right" href="{{ route('register-user') }}"><i class="fa fa-plus"></i> Add New User</a>
             </div>
         </div>
     </div>
@@ -42,7 +42,7 @@
             </tr>
             @foreach ($users as $key => $user)
             <tr>
-                <td>{{ $key + 1 }}</td>
+                <td>{{ $users->firstItem() + $key }}</td>
                 <td>{{ $user->full_name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->department->description }}</td>
@@ -58,6 +58,7 @@
             </tr>
             @endforeach
         </table>
+        {{$users->links("pagination::bootstrap-4")}}
     </div>
 </div>
 

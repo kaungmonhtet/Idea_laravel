@@ -38,17 +38,18 @@
             </tr>
             @foreach ($departments as $key => $department)
             <tr>
-                <td>{{ $key + 1 }}</td>
+                <td>{{ $departments->firstItem() + $key }}</td>
                 <td>{{ $department->code }}</td>
                 <td>{{ $department->description }}</td>
                 <td>
-                    <a class="btn btn-primary btn-sm btn-light department_edit" data-edit="{{$department}}" data-toggle="modal" data-target="#editModal">
-                    <span class="fa fa-edit fa-lg text-primary"></span></a>
+                    <a class="btn btn-primary btn-sm department_edit" data-edit="{{$department}}" data-toggle="modal" data-target="#editModal">
+                    <span class="fa fa-edit"></span></a>
                     <button type="button" class="btn btn-danger btn-sm open_delete" data-toggle="modal" data-id="{{$department->id}}" data-target="#modal_delete"><span class="fa fa-trash"></span></button>
                 </td>
             </tr>
             @endforeach
         </table>
+        {{$departments->links("pagination::bootstrap-4")}}
     </div>
 </div>
 

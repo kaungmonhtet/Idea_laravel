@@ -41,20 +41,21 @@
             </tr>
             @foreach ($academic_years as $key => $academic)
             <tr>
-                <td>{{ $key + 1 }}</td>
+                <td>{{ $academic_years->firstItem() + $key}}</td>
                 <td>{{ $academic->academic_year }}</td>
                 <td>{{ $academic->start_date }}</td>
                 <td>{{ $academic->end_date }}</td>
                 <td>{{ $academic->closure_date }}</td>
                 <td>{{ $academic->final_closure_date }}</td>
                 <td>
-                    <a class="btn btn-primary btn-sm btn-light academic_edit" data-edit="{{$academic}}" data-toggle="modal" data-target="#editModal">
-                    <span class="fa fa-edit fa-lg text-primary"></span></a>
+                    <a class="btn btn-primary btn-sm academic_edit" data-edit="{{$academic}}" data-toggle="modal" data-target="#editModal">
+                    <span class="fa fa-edit"></span></a>
                     <button type="button" class="btn btn-danger btn-sm open_delete" data-toggle="modal" data-id="{{$academic->id}}" data-target="#modal_delete"><span class="fa fa-trash"></span></button>
                 </td>
             </tr>
             @endforeach
         </table>
+        {{ $academic_years->links('pagination::bootstrap-4')}}
     </div>
 </div>
 

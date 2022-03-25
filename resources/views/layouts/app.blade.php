@@ -11,16 +11,16 @@
 
     <!-- Fonts -->
     <!-- Styles -->
-
+<link rel="stylesheet" type="text/css" href="{{ asset('css/app.css')}}">
     @yield('styles')
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <!-- <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
-                </a>
+                </a> -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -31,13 +31,40 @@
                     @else
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                        <a class="nav-link" href="{{ route('departments.index') }}">Department</a>
-                    </li>
+                            <a class="nav-link" href="{{ route('users.index') }}">User</a>
+                        </li>
                     </ul>
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                        <a class="nav-link" href="{{ route('categories.index') }}">Category</a>
-                    </li>
+                            <a class="nav-link" href="{{ route('departments.index') }}">Department</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('categories.index') }}">Category</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('academic-years.index') }}">Academic Year</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('ideas.index') }}">Idea</a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('idea.closure') }}">Idea list By Final Closure Date</a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('reports.index') }}">Report</a>
+                        </li>
                     </ul>
                     @endguest
 
@@ -88,6 +115,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     @yield('scripts')
     
     <script type="text/javascript">

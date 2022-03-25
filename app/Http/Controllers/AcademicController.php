@@ -15,7 +15,7 @@ class AcademicController extends Controller
      */
     public function index()
     {
-        $academic_years = AcademicYear::get();
+        $academic_years = AcademicYear::paginate(5);
 
         return view('academic-year.index',compact('academic_years'));
     }

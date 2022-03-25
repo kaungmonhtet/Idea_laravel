@@ -6,6 +6,9 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
+            <div class="col-md-8 text-end mt-4">
+                <a class="btn btn-primary m-2 float-right" href="{{ route('ideas.index') }}"><i class="fa fa-arrow-left"></i> Back To List</a>
+            </div>
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
@@ -19,6 +22,7 @@
                             <p>{{ $comment->description }}</p>
                         </div>
                     @endforeach
+                    @if($closure_check)
                     <hr />
                     <h4>Add comment</h4>
                     <form method="post" action="{{ route('comment.add') }}">
@@ -58,6 +62,7 @@
                         </div>
                         </div>
                     </form>
+                    @endif
                 </div>
             </div>
         </div>

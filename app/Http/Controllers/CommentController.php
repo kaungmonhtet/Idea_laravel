@@ -4,46 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Models\Reaction;
 use App\Models\Comment;
+use App\Models\Idea;
+use App\Mail\SendMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Auth;
 
 class CommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    // Comment create
     public function store(Request $request)
     {
-
-        Comment::create([
+        $comment = Comment::create([
             'description' => $request->comment_body,
             'user_id' => Auth::id(),
             'idea_id' => $request->idea_id,
             'annonymous' => $request->annonymous ? $request->annonymous : 0,
         ]);
+
+        $sent_user = Idea::find($request->idea_id)->user;
+
+        Mail::to($sent_user->email)->send(new SendMail($comment));
+
+        // $sent_user->notify(new SendMail($comment));
 
         return back();
     
