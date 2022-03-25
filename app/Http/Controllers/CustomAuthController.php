@@ -61,7 +61,7 @@ class CustomAuthController extends Controller
 
         User::create($data);
 
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('success', 'Register Successfully.');
     }
  
  

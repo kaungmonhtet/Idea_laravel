@@ -84,10 +84,9 @@ class CategoryController extends Controller
             'description' => ['required'],
         ]);
 
-         $category->update($data);
-        $request->session()->flash('message', 'New customer added successfully.');
-        return response()->json(['status'=>'Hooray']);
-         // return redirect()->route('categories.index')->with('success', 'Updated Successfully.');
+        $category->update($data);
+
+        return redirect()->route('categories.index')->with('success', 'Updated Successfully.');
     }
 
     /**
@@ -99,6 +98,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-         return redirect()->route('categories.index');
+        
+        return redirect()->route('categories.index')->with('success', 'Deleted Successfully.');
     }
 }

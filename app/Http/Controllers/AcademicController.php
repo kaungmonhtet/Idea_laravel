@@ -96,7 +96,7 @@ class AcademicController extends Controller
         $data['last_modified_by'] = Auth::id();
         $academicYear->update($data);
 
-        return redirect()->route('academic-years.index')->with('success', 'Updated Successfully.');
+        return redirect()->route('academic-years.index');
     }
 
     /**
@@ -109,7 +109,7 @@ class AcademicController extends Controller
     {
         $academicYear->delete();
 
-        return redirect()->route('academic-years.index');
+        return redirect()->route('academic-years.index')->with('success', 'Deleted Successfully.');
     }
 
     public function getClosure(Request $request)

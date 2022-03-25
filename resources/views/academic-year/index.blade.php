@@ -177,15 +177,14 @@
 
 @endsection
 @section('scripts')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+
 <script type="text/javascript">
  $(document).ready(function() {
       $('#formData').on('btn_save', function(e){
 
         var url = '{{ route("academic-years.store") }}';
-console.log(url);
+
           $.ajax({
                 url: url, 
                 type: 'POST', 
@@ -198,10 +197,10 @@ console.log(url);
                         icon: 'success',
                         title: 'Saved successfully',
                     });
-                    console.log(data);
-                    // $("#addModal").modal('hide');
-                    // $("#formData")[0].reset();
-                    // $("#academic_list").load(window.location + " #academic_list");
+
+                    $("#addModal").modal('hide');
+                    $("#formData")[0].reset();
+                    location.reload();
                 },
                 error: function(error) {
                     console.log('error');
@@ -221,7 +220,6 @@ console.log(url);
           $(".modal-body #final_closure_date").val(edit_datas.final_closure_date);
 
           // $(".modal-body #btn_save").html("Update");
-           
       });
 
       $("#btn_update").click(function(e) {

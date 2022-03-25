@@ -46,7 +46,7 @@ class DepartmentController extends Controller
 
         Department::create($data);
 
-        return redirect()->route('departments.index');
+        return redirect()->route('departments.index')->with('success', 'Saved Successfully.');
     }
 
     /**
@@ -87,7 +87,7 @@ class DepartmentController extends Controller
 
          $department->update($data);
 
-         return redirect()->route('departments.index');
+         return redirect()->route('departments.index')->with('success','Updated Successfully');
     }
 
     /**
@@ -100,6 +100,6 @@ class DepartmentController extends Controller
     {
          $department->delete();
 
-         return redirect()->route('departments.index');
+         return redirect()->route('departments.index')->with('success', 'Deleted Successfully.');
     }
 }

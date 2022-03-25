@@ -161,7 +161,7 @@ class IdeaController extends Controller
 
         $idea->update($data);
 
-        return redirect()->route('ideas.index')->with('success', 'Saved Successfully.');
+        return redirect()->route('ideas.index')->with('success', 'Updated Successfully.');
     }
 
     /**

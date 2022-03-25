@@ -13,4 +13,14 @@ class Department extends Model
         'code',
         'description',
     ];
+
+    public function idea()
+    {
+        return $this->hasMany(Idea::class);
+    }
+
+    public function user()
+    {
+        return $this->hasMany(User::class);
+    }
 }

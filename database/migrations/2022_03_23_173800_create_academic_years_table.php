@@ -20,8 +20,8 @@ class CreateAcademicYearsTable extends Migration
             $table->date('end_date');
             $table->date('final_closure_date');
             $table->date('closure_date');
-            $table->integer('created_by');
-            $table->integer('last_modified_by');
+            $table->integer('created_by')->nullable();
+            $table->integer('last_modified_by')->nullable();
             $table->timestamps();
         });
     }

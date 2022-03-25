@@ -8,6 +8,7 @@ use App\Http\Controllers\AcademicController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,7 @@ use App\Http\Controllers\CommentController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('login', function () {
@@ -30,23 +31,29 @@ Route::get('login', function () {
 
 Auth::routes();
 
-Route::get('dashboard', [CustomAuthController::class, 'dashboard']); 
-Route::get('login', [CustomAuthController::class, 'index'])->name('login');
-Route::post('custom-login', [CustomAuthController::class, 'customLogin'])->name('login.custom'); 
-Route::get('registration', [CustomAuthController::class, 'registration'])->name('register-user');
-Route::post('custom-registration', [CustomAuthController::class, 'customRegistration'])->name('register.custom'); 
-Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('categories', CategoryController::class);
-Route::resource('departments', DepartmentController::class);
-Route::resource('academic-years', AcademicController::class);
-Route::resource('users', UserController::class);
-Route::resource('ideas', IdeaController::class);
-Route::post('/comment/store', [CommentController::class,'store'])->name('comment.add');
-Route::post('/reaction/store', [CommentController::class,'reactionStore'])->name('reaction.add');
-Route::post('get-closure-date/', [AcademicController::class,'getClosure'])->name('get-closure-date');
-Route::get('reports', [AcademicController::class,'getClosure'])->name('reports.index');
-Route::get('ideas-by-closure', [IdeaController::class,'ideaListByFCDate'])->name('idea.closure');
-Route::get('download-zip', [IdeaController::class,'downloadZip'])->name('download-zip');
-// Route::get('reports', [AcademicController::class,'getClosure'])->name('reports.index');
+    Route::resource('categories', CategoryController::class);
+    Route::resource('departments', DepartmentController::class);
+    Route::resource('academic-years', AcademicController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('ideas', IdeaController::class);
+    Route::post('/comment/store', [CommentController::class,'store'])->name('comment.add');
+    Route::post('/reaction/store', [CommentController::class,'reactionStore'])->name('reaction.add');
+    Route::post('get-closure-date/', [AcademicController::class,'getClosure'])->name('get-closure-date');
+    Route::get('reports', [AcademicController::class,'getClosure'])->name('reports.index');
+    Route::get('ideas-by-closure', [IdeaController::class,'ideaListByFCDate'])->name('idea.closure');
+    Route::get('download-zip', [IdeaController::class,'downloadZip'])->name('download-zip');
+
+    Route::get('registration', [CustomAuthController::class, 'registration'])->name('register-user');
+    Route::post('custom-registration', [CustomAuthController::class, 'customRegistration'])->name('register.custom');
+
+    Route::get('ideas-per-department', [ReportController::class, 'ideaPerDepartment'])->name('ideas-per-department');
+    Route::get('ideas-without-comment', [ReportController::class, 'ideaWithoutComment'])->name('ideas-without-comment');
+    Route::get('anonymous-ideas', [ReportController::class, 'anonymousIdea'])->name('anonymous-ideas');
+    Route::get('anonymous-comment', [ReportController::class, 'anonymousComment'])->name('anonymous-comment');
+
+});
+
+Route::get('login', [CustomAuthController::class, 'index'])->name('login');

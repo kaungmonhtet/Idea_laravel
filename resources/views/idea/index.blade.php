@@ -42,12 +42,15 @@
                     <td>{{ $idea->view_count }}</td>
                     <td>
                         <a href="{{ route('ideas.show', $idea->id) }}" class="btn btn-success btn-sm"><span class="fa fa-eye"></span></a>
+
+                        @if(!Auth::user()->isStaff())
                         <a href="{{ route('ideas.edit', $idea) }}" class="btn btn-primary btn-sm"><span class="fa fa-edit"></span></a>
                         <button type="button" class="btn btn-danger btn-sm open_delete" data-toggle="modal" data-id="{{$idea->id}}" data-target="#modal_delete"><span class="fa fa-trash"></span></button>
                         @if($idea->document_url)
                         <a class="btn btn-secondary btn-sm" href="{{ Storage::url($idea->document_url) }}" download="">
                             <span class="fa fa-download"></span>
                         </a>
+                        @endif
                         @endif
                     </td>
                 </tr>

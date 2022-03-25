@@ -29,6 +29,7 @@
                     <!-- Left Side Of Navbar -->
                     @guest
                     @else
+                    @if(!Auth::user()->isStaff())
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('users.index') }}">User</a>
@@ -49,11 +50,14 @@
                             <a class="nav-link" href="{{ route('academic-years.index') }}">Academic Year</a>
                         </li>
                     </ul>
+
+                    @if(Auth::user()->isStaff())
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('ideas.index') }}">Idea</a>
                         </li>
                     </ul>
+                    @endif
 
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
@@ -62,10 +66,30 @@
                     </ul>
 
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('reports.index') }}">Report</a>
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Report
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('ideas-per-department') }}">
+                                    {{ __('Ideas by per Deparment') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route('ideas-without-comment') }}">
+                                    {{ __('Ideas Without Comment') }}
+                                </a>                                
+                                <a class="dropdown-item" href="{{ route('anonymous-ideas') }}">
+                                    {{ __('Anonymous Ideas') }}
+                                </a>                                
+                                <a class="dropdown-item" href="{{ route('anonymous-comment') }}">
+                                    {{ __('Anonymous Comment') }}
+                                </a>
+                            </div>
+
                         </li>
+
                     </ul>
+                    @endif
                     @endguest
 
 
@@ -79,11 +103,11 @@
                                 </li>
                             @endif
 
-                            @if (Route::has('register'))
+<!--                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
-                            @endif
+                            @endif -->
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -114,8 +138,10 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     @yield('scripts')
     
     <script type="text/javascript">

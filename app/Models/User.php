@@ -84,4 +84,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Comment::class);
     }
+
+    public function isStaff()
+    {
+        return $this->role == 3 ? true : false;
+    }
 }
