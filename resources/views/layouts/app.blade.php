@@ -51,7 +51,7 @@
                         </li>
                     </ul>
 
-                    @if(Auth::user()->isStaff())
+                    @if(Auth::user()->isStaff() OR !Auth::user()->isStaff())
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('ideas.index') }}">Idea</a>
