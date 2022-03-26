@@ -37,7 +37,7 @@
                 <th>Description</th>
                 <th>Idea Count</th>
                 <th>Percentage</th>
-                <th>Idea Count</th>
+                <!-- <th>Idea Count</th> -->
                 <!-- <th width="180px">Action</th> -->
             </tr>
             @foreach ($departments as $key => $department)
