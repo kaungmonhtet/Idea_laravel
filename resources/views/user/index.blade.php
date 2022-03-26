@@ -188,7 +188,7 @@
 
 $(document).on("click", ".open_delete", function () { 
      var id = $(this).data('id');
-     var url = '{{ route("academic-years.destroy", ":id") }}';
+     var url = '{{ route("users.destroy", ":id") }}';
      url = url.replace(':id', id);
      $('#delete_form').attr('action', url);
  });

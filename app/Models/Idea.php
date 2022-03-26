@@ -27,6 +27,11 @@ class Idea extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function reactions()
+    {
+        return $this->hasMany(Reaction::class);
+    }
+
     public function createdByUser()
     {
         return $this->user->full_name;

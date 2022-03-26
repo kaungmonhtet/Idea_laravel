@@ -173,6 +173,8 @@ class IdeaController extends Controller
     public function destroy(Idea $idea)
     {
         $idea->delete();
+        $idea->comments()->delete();
+        $idea->reactions()->delete();
 
         return redirect()->route('ideas.index')->with('success', 'Deleted Successfully.');
     }
