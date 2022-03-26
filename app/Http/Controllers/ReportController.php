@@ -6,13 +6,14 @@ use App\Models\Department;
 use App\Models\Idea;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use DB;
 
 class ReportController extends Controller
 {
     public function ideaPerDepartment(Request $request)
     {
-        $departments = Department::withCount('idea')->paginate(10);
-
+        // $departments = Department::withCount('idea')->paginate(10);
+        return DB::select(DB::raw("SELECT COUNT(*) FROM users INNER JOIN ideas ON users.id = ideas.user_id INNER JOIN comments ON users.id = comments.user_id INNER JOIN reactions ON users.id = reactions.user_id"));
         if ($request->btn == 'export') {
             // $departments = Department::withCount('idea')->get();
 
@@ -23,7 +24,7 @@ class ReportController extends Controller
                 $list[0] = "No,Department Code,Department Name,Idea Count";
 
                 foreach ($departments as $key => $department) {
-                    
+
                 $list[$key + 1] = ($key +1).","."{$department->code}, {$department->description}, {$department->idea_count}";
                 }
 

@@ -75,7 +75,8 @@ class IdeaController extends Controller
 
             $name = time().Str::random(6).".".$ext;
 
-            $data['document_url'] = $request->document_url->storeAs('document', $name);
+            $request->document_url->move(public_path('document'), $name);
+            $data['document_url'] = $name;
         }
 
         $data['annonymous'] = $request->annonymous ? $request->annonymous : 0;
@@ -149,12 +150,13 @@ class IdeaController extends Controller
         $data['department_id'] = Auth::user()->department_id;
 
         if ($request->document_url) {
-            \Storage::delete($idea->document_url);
+            $image_path = public_path("document/".$idea->document_url);
+            File::delete($image_path);
             $ext = $request->document_url->getClientOriginalExtension();
 
             $name = time().Str::random(6).".".$ext;
-
-            $data['document_url'] = $request->document_url->storeAs('document', $name);
+            $request->document_url->move(public_path('document'), $name);
+            $data['document_url'] = $name;
         }
 
         $data['annonymous'] = $request->annonymous ? $request->annonymous : 0;
@@ -202,23 +204,30 @@ class IdeaController extends Controller
         $zip = new ZipArchive;
    
         $fileName = 'myfile.zip';
-   
+        $ideas = Idea::whereHas('academic', function ($query) {
+                                $query->where('final_closure_date', '>', now()->toDateString());
+                            })->get();
+
+        if ($ideas->count() <= 0) {
+            return redirect()->route('idea.closure',compact('ideas'));
+        }
+
         if ($zip->open(public_path($fileName), ZipArchive::CREATE) === TRUE)
         {
-            $ideas = Idea::take(2)->get();
-   
             foreach ($ideas as $key => $idea) {
-                $relativeNameInZipFile = basename($key+1);
-                $path = \Storage::url($idea->document_url);
-                $url = asset($path);
-                $file = file_get_contents($url);
-                // dd($file);
-                $zip->addFile($file, $relativeNameInZipFile);
+                $relativeNameInZipFile = basename($idea->document_url);
+                $path = public_path('document');
+
+                $files = File::files($path);
+
+                $zip->addFile($files[$key], $relativeNameInZipFile);
+
             }
              
             $zip->close();
         }
     
-        return response()->download(public_path($fileName));
+        return response()->download(public_path($fileName))->deleteFileAfterSend();
     }
 }
+;

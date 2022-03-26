@@ -22,7 +22,7 @@
                             <p>{{ $comment->description }}</p>
                         </div>
                     @endforeach
-                    @if($closure_check)
+                    @if(!$closure_check)
                     <hr />
                     <h4>Add comment</h4>
                     <form method="post" action="{{ route('comment.add') }}">
