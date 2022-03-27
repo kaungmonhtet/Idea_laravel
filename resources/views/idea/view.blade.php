@@ -21,7 +21,9 @@
                             <strong>{{ $comment->annonymous == true ? "Anonymous" : $comment->user->full_name }}</strong><br>
 
                                 <span>{{ $comment->description }}</span> &nbsp; 
+                                @if(auth()->id() == $comment->user_id)
                                 <a class="category_edit" data-edit="{{$comment}}" data-toggle="modal" data-target="#editModal"> Edit </a>
+                                @endif
                                 
                        
                         </div>
@@ -89,7 +91,7 @@
                         <input type="hidden" name="id" id="edit-form-id">
                         <input type="hidden" name="idea_id" id="idea_id" />
                         <div class="form-group">
-                            <label for="description">Description: </label>
+                            <!-- <label for="description">Comment </label> -->
 
                             <textarea name="description" id="description" class="form-control" cols="40" rows="5" placeholder="Enter Description" required=""></textarea>
                         </div>

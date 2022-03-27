@@ -22,15 +22,16 @@ use App\Http\Controllers\ReportController;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return redirect()->route('users.index');
 });
 
-Route::get('login', function () {
-    return view('auth.login');
-});
+// Route::get('/login', function () {
+//     dd("HI");
+//     return view('auth.login');
+// });
+
 
 Auth::routes();
-
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -57,4 +58,4 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
-Route::get('login', [CustomAuthController::class, 'index'])->name('login');
+// Route::get('login', [CustomAuthController::class, 'index'])->name('login');
