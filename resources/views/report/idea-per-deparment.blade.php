@@ -25,11 +25,7 @@
             </form>
             </div>
     <div class="col-lg-8 margin-tb">
-        @if ($message = Session::get('success'))
-            <div class="alert alert-success mt-3 alert-flash">
-                <span>{{ $message }}</span>
-            </div>
-        @endif
+
         <table class="table table-bordered mt-4" id="department_list">
             <tr>
                 <th>No</th>
@@ -37,7 +33,7 @@
                 <th>Description</th>
                 <th>Idea Count</th>
                 <th>Percentage</th>
-                <!-- <th>Idea Count</th> -->
+                <th>Idea Count</th>
                 <!-- <th width="180px">Action</th> -->
             </tr>
             @foreach ($departments as $key => $department)
@@ -47,6 +43,7 @@
                 <td>{{ $department->description }}</td>
                 <td>{{ $department->idea_count }}</td>
                 <td>{{ $department->idea_count/100 }}</td>
+                <td>{{ $department->getCount($department->user) }}</td>
 
             </tr>
             @endforeach

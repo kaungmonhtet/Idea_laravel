@@ -32,6 +32,26 @@ class CommentController extends Controller
     
     }
 
+        // Comment Update
+    public function update(Request $request, Comment $comment)
+    {
+        $comment->update([
+            'description' => $request->description,
+            'user_id' => Auth::id(),
+            'idea_id' => $request->idea_id,
+            'annonymous' => $request->annonymous ? $request->annonymous : 0,
+        ]);
+
+        // $sent_user = Idea::find($request->idea_id)->user;
+
+        // Mail::to($sent_user->email)->send(new SendMail($comment));
+
+        // $sent_user->notify(new SendMail($comment));
+
+        return back();
+    
+    }
+
     public function reactionStore(Request $request)
     {
         Reaction::updateOrCreate(

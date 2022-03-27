@@ -17,39 +17,34 @@
 </div>
 <div class="row justify-content-center">
             <div class="col-md-8 text-end mt-4">
-                <a class="btn btn-primary m-2 float-right" href="{{ route('download-zip') }}"><i class="fa fa-arrow-left"></i> Download</a>
+                <a class="btn btn-primary m-2 float-right" href="{{ route('download-zip') }}"><i class="fa fa-download"></i> Download</a>
             </div>
     <div class="col-lg-8 margin-tb">
-            @if ($message = Session::get('success'))
-                <div class="alert alert-success mt-3 alert-flash">
-                    <span>{{ $message }}</span>
-                </div>
-            @endif
-            <table  class="table table-bordered mt-4">
-                <thead>
-                    <th>ID</th>
-                    <th>Title</th>
-                    <th>Created By</th>
-                    <th>View Count</th>
-                    <!-- <th>Action</th> -->
-                </thead>
-                <tbody>
-                @foreach($ideas as $key => $idea)
-                <tr>
-                    <td>{{ $ideas->firstItem() + $key}}</td>
-                    <td>{{ $idea->title }}</td>
-                    <td>{{ $idea->annonymous == true ? "Anonymous" : $idea->createdByUser()}}</td>
-                    <td>{{ $idea->view_count }}</td>
-                    <td>
+        <table  class="table table-bordered mt-4">
+            <thead>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Created By</th>
+                <th>View Count</th>
+                <!-- <th>Action</th> -->
+            </thead>
+            <tbody>
+            @foreach($ideas as $key => $idea)
+            <tr>
+                <td>{{ $ideas->firstItem() + $key}}</td>
+                <td>{{ $idea->title }}</td>
+                <td>{{ $idea->annonymous == true ? "Anonymous" : $idea->createdByUser()}}</td>
+                <td>{{ $idea->view_count }}</td>
+                <td>
 
-                    </td>
-                </tr>
-                @endforeach
-                </tbody>
+                </td>
+            </tr>
+            @endforeach
+            </tbody>
 
-            </table>
-            {{$ideas->links("pagination::bootstrap-4")}}
-        </div>
+        </table>
+        {{$ideas->links("pagination::bootstrap-4")}}
     </div>
+</div>
 
 @endsection

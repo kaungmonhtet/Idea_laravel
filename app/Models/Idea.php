@@ -42,4 +42,29 @@ class Idea extends Model
         return $this->belongsTo(AcademicYear::class,'academic_year_id');
     }
 
+    public function scopeFilter($query,$filters)
+    {
+        $filters->apply($query);
+    }
+
+    public function isOwner()
+    {
+        return $this->user_id == auth()->id() ? true : false;
+    }
+
+    public function likeCount()
+    {
+        return $this->reactions()->where('up_down',1)->count();
+    }    
+
+    public function unlikeCount()
+    {
+        return $this->reactions()->where('up_down',0)->count();
+    }    
+
+    public function commentCount()
+    {
+        return $this->comments()->count();
+    }
+
 }

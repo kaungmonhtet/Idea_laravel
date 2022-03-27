@@ -12,27 +12,29 @@ class ReportController extends Controller
 {
     public function ideaPerDepartment(Request $request)
     {
-        // $departments = Department::withCount('idea')->paginate(10);
-        return DB::select(DB::raw("SELECT COUNT(*) FROM users INNER JOIN ideas ON users.id = ideas.user_id INNER JOIN comments ON users.id = comments.user_id INNER JOIN reactions ON users.id = reactions.user_id"));
+        $departments = Department::withCount('idea')->paginate(10);
+        // $departments = Department::where('id',2)->withCount('idea')->paginate(10);
+
         if ($request->btn == 'export') {
-            // $departments = Department::withCount('idea')->get();
 
-            $file_name = now()->toDateString().".xlsx";
+            $departments = Department::withCount('idea')->get();
 
-            Department::withCount('idea')->chunk($departments->count(),function($departments) use ($file_name){
+            if ($departments->count() > 0) {
+                $file_name = now()->toDateString().".xlsx";
 
-                $list[0] = "No,Department Code,Department Name,Idea Count";
+                $list[0] = "No,Department Code,Department Name,Idea Count, Percentage";
 
                 foreach ($departments as $key => $department) {
 
-                $list[$key + 1] = ($key +1).","."{$department->code}, {$department->description}, {$department->idea_count}";
+                    $percentage = ($department->idea_count / 100);
+
+                    $list[$key + 1] = ($key +1).","."{$department->code}, {$department->description}, {$department->idea_count}, {$percentage}";
                 }
 
                 $this->export($list, $file_name);
 
-            });
-
-            return response()->download(public_path('files/'.$file_name));
+                return response()->download(public_path('files/'.$file_name));
+            }
         }
 
         return view('report.idea-per-deparment',compact('departments'));
@@ -44,9 +46,10 @@ class ReportController extends Controller
 
         if ($request->btn == 'export') {
 
-            $file_name = now()->toDateString().".xlsx";
+            $ideas = Idea::doesnthave('comments')->get();
 
-            Idea::doesnthave('comments')->chunk($ideas->count(),function($ideas) use ($file_name){
+            if ($ideas->count() > 0) {
+                $file_name = now()->toDateString().".xlsx";
 
                 $list[0] = "No,Title,Description,View Count,Created By";
 
@@ -57,9 +60,8 @@ class ReportController extends Controller
 
                 $this->export($list, $file_name);
 
-            });
-
-            return response()->download(public_path('files/'.$file_name));
+                return response()->download(public_path('files/'.$file_name));
+            }
         }
 
         return view('report.idea-without-comment',compact('ideas'));
@@ -71,9 +73,11 @@ class ReportController extends Controller
 
         if ($request->btn == 'export') {
 
-            $file_name = now()->toDateString().".xlsx";
 
-            Idea::where('annonymous',1)->chunk($ideas->count(),function($ideas) use ($file_name){
+            $ideas = Idea::where('annonymous',1)->get();
+
+            if ($ideas->count() > 0) {
+                $file_name = now()->toDateString().".xlsx";
 
                 $list[0] = "No,Title,Description,View Count,Created By";
 
@@ -84,9 +88,9 @@ class ReportController extends Controller
 
                 $this->export($list, $file_name);
 
-            });
 
-            return response()->download(public_path('files/'.$file_name));
+                return response()->download(public_path('files/'.$file_name));
+            }
         }
 
         return view('report.anonymous-idea',compact('ideas'));
@@ -98,9 +102,11 @@ class ReportController extends Controller
 
         if ($request->btn == 'export') {
 
-            $file_name = now()->toDateString().".xlsx";
 
-            Comment::where('annonymous',1)->chunk($comments->count(),function($comments) use ($file_name){
+            $comments = Comment::where('annonymous',1)->get();
+
+            if ($comments->count() > 0) {
+                $file_name = now()->toDateString().".xlsx";
 
                 $list[0] = "No,Commentted By,Description";
 
@@ -111,12 +117,11 @@ class ReportController extends Controller
 
                 $this->export($list, $file_name);
 
-            });
-
-            return response()->download(public_path('files/'.$file_name));
+                return response()->download(public_path('files/'.$file_name));
+            }
         }
 
-        return view('report.anonymous-comment',compact('comments'));
+        return view('report.anonymous-comment',compact('comments'))->with('success','No Data');
     }
 
     public function export($list, $file_name)

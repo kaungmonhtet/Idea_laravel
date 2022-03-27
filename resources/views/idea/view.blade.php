@@ -18,8 +18,12 @@
                     </p>
                      @foreach($idea->comments as $comment)
                         <div class="display-comment">
-                            <strong>{{ $comment->annonymous == true ? "Anonymous" : $comment->user->full_name }}</strong>
-                            <p>{{ $comment->description }}</p>
+                            <strong>{{ $comment->annonymous == true ? "Anonymous" : $comment->user->full_name }}</strong><br>
+
+                                <span>{{ $comment->description }}</span> &nbsp; 
+                                <a class="category_edit" data-edit="{{$comment}}" data-toggle="modal" data-target="#editModal"> Edit </a>
+                                
+                       
                         </div>
                     @endforeach
                     @if(!$closure_check)
@@ -68,6 +72,45 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="editModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Comment</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form id="EditformData" method="POST">
+                        @csrf
+                        @method("PATCH")
+                        <input type="hidden" name="id" id="edit-form-id">
+                        <input type="hidden" name="idea_id" id="idea_id" />
+                        <div class="form-group">
+                            <label for="description">Description: </label>
+
+                            <textarea name="description" id="description" class="form-control" cols="40" rows="5" placeholder="Enter Description" required=""></textarea>
+                        </div>
+                        <div class="form-group">
+                                <div class="form-check">
+                                    
+                                <input type="checkbox" name="annonymous" id="anonymous" value="1" class="form-check-input"/>
+                                <label for="annonymous" class="form-check-label">{{ __('Anonymous') }}</label>
+                                </div>
+
+                            </div>
+                        <hr>
+                        <div class="form-group float-right">
+                            <button type="submit" class="btn btn-primary" id="btn_update">Update</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('scripts')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -97,6 +140,41 @@
                 
           });
       });
-  });
+
+        $('.category_edit').on("click",function () {
+          var edit_datas = $(this).data('edit');
+          var check = edit_datas.annonymous;
+
+          $(".modal-body #edit-form-id").val(edit_datas.id);
+          $(".modal-body #idea_id").val(edit_datas.idea_id);
+          $(".modal-body #description").val(edit_datas.description);
+          $("#anonymous").prop('checked', check);
+          // $(".modal-body #btn_save").html("Update");
+      });
+
+    $("#btn_update").click(function(e) {
+
+        e.preventDefault();
+       let comment = $('#edit-form-id').val();
+       let url = "{{ route('comments.update', ':comment') }}"
+       url  = url.replace(':comment', comment);
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: $("#EditformData").serialize(),
+            success: function(response) {
+                $("#editModal").modal('hide');
+                $("#EditformData")[0].reset();
+                window.location.reload();
+
+            }
+        });
+        
+    });
+});
 </script>
 @stop

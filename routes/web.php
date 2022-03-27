@@ -40,6 +40,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('ideas', IdeaController::class);
     Route::post('/comment/store', [CommentController::class,'store'])->name('comment.add');
+    Route::patch('comment/{comment}/update', [CommentController::class,'update'])->name('comments.update');
     Route::post('/reaction/store', [CommentController::class,'reactionStore'])->name('reaction.add');
     Route::post('get-closure-date/', [AcademicController::class,'getClosure'])->name('get-closure-date');
     Route::get('reports', [AcademicController::class,'getClosure'])->name('reports.index');

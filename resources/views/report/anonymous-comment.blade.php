@@ -25,11 +25,6 @@
             </form>
             </div>
     <div class="col-lg-8 margin-tb">
-        @if ($message = Session::get('success'))
-            <div class="alert alert-success mt-3 alert-flash">
-                <span>{{ $message }}</span>
-            </div>
-        @endif
         <table class="table table-bordered mt-4" id="department_list">
             <tr>
                 <th>No</th>

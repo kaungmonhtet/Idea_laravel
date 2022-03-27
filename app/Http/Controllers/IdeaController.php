@@ -12,6 +12,7 @@ use App\Models\Reaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\IdeaCreateMail;
+use App\Filters\IdeaFilter;
 use Auth;
 use File;
 use ZipArchive;
@@ -24,9 +25,10 @@ class IdeaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(IdeaFilter $filters)
     {
-        $ideas = Idea::paginate(5);
+        $ideas = Idea::filter($filters)->paginate(5);
+        // $count = DB::table('ideas')->join('comments',)
 
         return view('idea.index',compact('ideas'));
     }

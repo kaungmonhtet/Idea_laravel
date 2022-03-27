@@ -85,8 +85,23 @@ class User extends Authenticatable
         return $this->hasOne(Comment::class);
     }
 
+    public function reaction()
+    {
+        return $this->hasOne(Reaction::class);
+    }
+
+    public function ideas()
+    {
+        return $this->hasMany(Idea::class);
+    }
+
     public function isStaff()
     {
         return $this->role == 3 ? true : false;
+    }
+
+    public function isOwner()
+    {
+        return $this->id == auth()->id() ? true : false;
     }
 }

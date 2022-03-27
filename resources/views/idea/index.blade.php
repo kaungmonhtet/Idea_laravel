@@ -13,6 +13,17 @@
                 </div>
             </div>
             <div class="col-md-12 text-end mt-4">
+                <form action="{{route('ideas.index')}}" method="get">
+                    <select name="category_id" onchange="this.form.submit()" class="col-form-label m-1 float-left">
+                      <option value="all">All</option>
+                      <option value="name" {{request("category_id") == "name" ? 'selected' : ''}}>Department Name</option>
+                      <option value="asc" {{request('category_id') == "asc" ? 'selected' : ''}}>Latest</option>
+                      <option value="desc" {{request('category_id') == "desc" ? 'selected' : ''}}>Newest</option>
+                      <option value="like" {{request('category_id') == "like" ? 'selected' : ''}}>Most Liked</option>
+                      <option value="comment" {{request('category_id') == "comment" ? 'selected' : ''}}>Most Comment</option>
+                      
+                    </select>
+                </form>
                 <a class="btn btn-primary m-1 float-right" href="{{ route('ideas.create') }}"><i class="fa fa-plus"></i> Add New Idea</a>
             </div>
         </div>
@@ -20,17 +31,15 @@
 </div>
 <div class="row justify-content-center">
     <div class="col-lg-8 margin-tb">
-            @if ($message = Session::get('success'))
-                <div class="alert alert-success mt-3 alert-flash">
-                    <span>{{ $message }}</span>
-                </div>
-            @endif
             <table  class="table table-bordered mt-4">
                 <thead>
                     <th>ID</th>
                     <th>Title</th>
                     <th>Created By</th>
                     <th>View Count</th>
+                    <th>Like Count</th>
+                    <th>Unlike Count</th>
+                    <th>Comments Count</th>
                     <th>Action</th>
                 </thead>
                 <tbody>
@@ -40,16 +49,21 @@
                     <td>{{ $idea->title }}</td>
                     <td>{{ $idea->annonymous == true ? "Anonymous" : $idea->createdByUser()}}</td>
                     <td>{{ $idea->view_count }}</td>
+                    <td>{{ $idea->likeCount() }}</td>
+                    <td>{{ $idea->unlikeCount() }}</td>
+                    <td>{{ $idea->commentCount() }}</td>
                     <td>
                         <a href="{{ route('ideas.show', $idea->id) }}" class="btn btn-success btn-sm"><span class="fa fa-eye"></span></a>
 
+                        @if($idea->user->isOwner())
                         <a href="{{ route('ideas.edit', $idea) }}" class="btn btn-primary btn-sm"><span class="fa fa-edit"></span></a>
-                        @if(!Auth::user()->isStaff())
+                        @if(!Auth::user()->isStaff() && $idea->user->isOwner())
                         <button type="button" class="btn btn-danger btn-sm open_delete" data-toggle="modal" data-id="{{$idea->id}}" data-target="#modal_delete"><span class="fa fa-trash"></span></button>
                         @if($idea->document_url)
                         <a class="btn btn-secondary btn-sm" href="{{ Storage::url($idea->document_url) }}" download="">
                             <span class="fa fa-download"></span>
                         </a>
+                        @endif
                         @endif
                         @endif
                     </td>
