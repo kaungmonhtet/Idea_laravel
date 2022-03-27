@@ -10,6 +10,10 @@ use DB;
 
 class ReportController extends Controller
 {
+    public function __construct ()
+    {
+        $this->header = array('Content-Type:application/vnd.ms-excel');
+    }
     public function ideaPerDepartment(Request $request)
     {
         $departments = Department::withCount('idea')->paginate(10);
@@ -32,8 +36,8 @@ class ReportController extends Controller
                 }
 
                 $this->export($list, $file_name);
-
-                return response()->download(public_path('files/'.$file_name));
+                    
+                return response()->download(public_path('files/'.$file_name), $file_name, $this->header);
             }
         }
 
@@ -60,7 +64,7 @@ class ReportController extends Controller
 
                 $this->export($list, $file_name);
 
-                return response()->download(public_path('files/'.$file_name));
+                return response()->download(public_path('files/'.$file_name), $file_name, $this->header);
             }
         }
 
@@ -89,7 +93,7 @@ class ReportController extends Controller
                 $this->export($list, $file_name);
 
 
-                return response()->download(public_path('files/'.$file_name));
+                return response()->download(public_path('files/'.$file_name), $file_name, $this->header);
             }
         }
 
@@ -117,7 +121,7 @@ class ReportController extends Controller
 
                 $this->export($list, $file_name);
 
-                return response()->download(public_path('files/'.$file_name));
+                return response()->download(public_path('files/'.$file_name), $file_name,$this->header);
             }
         }
 
