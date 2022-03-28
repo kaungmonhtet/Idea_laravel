@@ -33,7 +33,7 @@
                 <th>Description</th>
                 <th>Idea Count</th>
                 <th>Percentage</th>
-                <th>Idea Count</th>
+                <th>Contributor Count</th>
                 <!-- <th width="180px">Action</th> -->
             </tr>
             @foreach ($departments as $key => $department)
@@ -43,7 +43,7 @@
                 <td>{{ $department->description }}</td>
                 <td>{{ $department->idea_count }}</td>
                 <td>{{ $department->idea_count/100 }}</td>
-                <td>{{ $department->getCount($department->user) }}</td>
+                <td>{{ $department->getCount($department->user) + $department->idea_count }}</td>
 
             </tr>
             @endforeach

@@ -26,12 +26,11 @@ class Department extends Model
 
     public function getCount($users)
     {
+        $count = 0;
         foreach ($users as $key => $user) {
-            dd($this->reactionCount($user));
-            $count =+ ($this->commentCount($user) + $this->reactionCount($user));
-
-            return $count ?? 0;
+            $count += $this->commentCount($user) + $this->reactionCount($user);
         }
+        return $count;
     }
 
     public function commentCount($user)

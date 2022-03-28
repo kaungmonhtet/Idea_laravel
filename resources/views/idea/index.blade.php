@@ -31,7 +31,7 @@
 </div>
 <div class="row justify-content-center">
     <div class="col-lg-8 margin-tb">
-            <table  class="table table-bordered mt-4">
+            <table class="table table-bordered mt-4">
                 <thead>
                     <th>ID</th>
                     <th>Department</th>
@@ -57,15 +57,14 @@
                     <td>
                         <a href="{{ route('ideas.show', $idea->id) }}" class="btn btn-success btn-sm"><span class="fa fa-eye"></span></a>
 
-                        @if($idea->user->isOwner() || Auth::user()->isManager())
+                        @if(!Auth::user()->isStaff() && !Auth::user()->isQAC() || $idea->user->isOwner())
                         <a href="{{ route('ideas.edit', $idea) }}" class="btn btn-primary btn-sm"><span class="fa fa-edit"></span></a>
-                        @if(!Auth::user()->isStaff() || $idea->user->isOwner())
+                        
                         <button type="button" class="btn btn-danger btn-sm open_delete" data-toggle="modal" data-id="{{$idea->id}}" data-target="#modal_delete"><span class="fa fa-trash"></span></button>
                         @if($idea->document_url)
-                        <a class="btn btn-secondary btn-sm" href="{{ Storage::url($idea->document_url) }}" download="">
+                        <a class="btn btn-secondary btn-sm" href="{{ asset('document/'.$idea->document_url) }}" download="">
                             <span class="fa fa-download"></span>
                         </a>
-                        @endif
                         @endif
                         @endif
                     </td>

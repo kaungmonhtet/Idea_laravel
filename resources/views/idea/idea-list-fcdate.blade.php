@@ -35,9 +35,7 @@
                 <td>{{ $idea->title }}</td>
                 <td>{{ $idea->annonymous == true ? "Anonymous" : $idea->createdByUser()}}</td>
                 <td>{{ $idea->view_count }}</td>
-                <td>
 
-                </td>
             </tr>
             @endforeach
             </tbody>

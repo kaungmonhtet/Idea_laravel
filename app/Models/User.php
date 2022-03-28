@@ -108,5 +108,10 @@ class User extends Authenticatable
     public function isManager()
     {
         return $this->role == 1 ? true : false;
+    }    
+
+    public function isQAC()
+    {
+        return $this->role == 2 ? true : false;
     }
 }

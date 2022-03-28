@@ -195,7 +195,7 @@ class IdeaController extends Controller
     public function ideaListByFCDate(Request $request)
     {
         $ideas = Idea::whereHas('academic', function ($query) {
-                                    $query->where('final_closure_date', '>', now()->toDateString());
+                                    $query->where('final_closure_date', '<', now()->toDateString());
                                 })->paginate(5);
 
         return view('idea.idea-list-fcdate',compact('ideas'));
@@ -207,7 +207,7 @@ class IdeaController extends Controller
    
         $fileName = 'myfile.zip';
         $ideas = Idea::whereHas('academic', function ($query) {
-                                $query->where('final_closure_date', '>', now()->toDateString());
+                                $query->where('final_closure_date', '<', now()->toDateString());
                             })->get();
 
         if ($ideas->count() <= 0) {
