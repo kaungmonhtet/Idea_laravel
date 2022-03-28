@@ -24,7 +24,7 @@ class ReportController extends Controller
             $departments = Department::withCount('idea')->get();
 
             if ($departments->count() > 0) {
-                $file_name = now()->toDateString().".xlsx";
+                $file_name = now()->toDateString().".csv";
 
                 $list[0] = "No,Department Code,Department Name,Idea Count, Percentage";
 
@@ -53,7 +53,7 @@ class ReportController extends Controller
             $ideas = Idea::doesnthave('comments')->get();
 
             if ($ideas->count() > 0) {
-                $file_name = now()->toDateString().".xlsx";
+                $file_name = now()->toDateString().".csv";
 
                 $list[0] = "No,Title,Description,View Count,Created By";
 
@@ -81,7 +81,7 @@ class ReportController extends Controller
             $ideas = Idea::where('annonymous',1)->get();
 
             if ($ideas->count() > 0) {
-                $file_name = now()->toDateString().".xlsx";
+                $file_name = now()->toDateString().".csv";
 
                 $list[0] = "No,Title,Description,View Count,Created By";
 
@@ -110,7 +110,7 @@ class ReportController extends Controller
             $comments = Comment::where('annonymous',1)->get();
 
             if ($comments->count() > 0) {
-                $file_name = now()->toDateString().".xlsx";
+                $file_name = now()->toDateString().".csv";
 
                 $list[0] = "No,Commentted By,Description";
 
@@ -139,5 +139,6 @@ class ReportController extends Controller
         }
 
         fclose($file);
+
     }
 }

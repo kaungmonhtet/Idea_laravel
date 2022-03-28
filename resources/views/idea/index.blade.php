@@ -34,6 +34,7 @@
             <table  class="table table-bordered mt-4">
                 <thead>
                     <th>ID</th>
+                    <th>Department</th>
                     <th>Title</th>
                     <th>Created By</th>
                     <th>View Count</th>
@@ -46,6 +47,7 @@
                 @foreach($ideas as $key => $idea)
                 <tr>
                     <td>{{ $ideas->firstItem() + $key}}</td>
+                    <td>{{ $idea->department->description }}</td>
                     <td>{{ $idea->title }}</td>
                     <td>{{ $idea->annonymous == true ? "Anonymous" : $idea->createdByUser()}}</td>
                     <td>{{ $idea->view_count }}</td>
@@ -55,9 +57,9 @@
                     <td>
                         <a href="{{ route('ideas.show', $idea->id) }}" class="btn btn-success btn-sm"><span class="fa fa-eye"></span></a>
 
-                        @if($idea->user->isOwner())
+                        @if($idea->user->isOwner() || Auth::user()->isManager())
                         <a href="{{ route('ideas.edit', $idea) }}" class="btn btn-primary btn-sm"><span class="fa fa-edit"></span></a>
-                        @if(!Auth::user()->isStaff() && $idea->user->isOwner())
+                        @if(!Auth::user()->isStaff() || $idea->user->isOwner())
                         <button type="button" class="btn btn-danger btn-sm open_delete" data-toggle="modal" data-id="{{$idea->id}}" data-target="#modal_delete"><span class="fa fa-trash"></span></button>
                         @if($idea->document_url)
                         <a class="btn btn-secondary btn-sm" href="{{ Storage::url($idea->document_url) }}" download="">

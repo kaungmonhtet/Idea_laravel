@@ -65,7 +65,7 @@ class IdeaController extends Controller
         ]);
 
         if ($request->closure_date < now()->toDateString()) {
-            return redirect()->route('ideas.create')->with('error', 'Idea Can\'t Be Submit.');
+            return redirect()->route('ideas.create')->with('error', 'Idea can’t be submitted because Closure Date is expired ');
         }
 
         $data['created_by'] = Auth::id();

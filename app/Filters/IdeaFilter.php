@@ -13,7 +13,7 @@ class IdeaFilter extends Filters
 	
 	public function category_id($value)
 	{
-		if ($value == ' name') 
+		if ($value == 'name') 
 		{
 			return $this->name();
 		}elseif ($value == 'asc') 
@@ -36,7 +36,8 @@ class IdeaFilter extends Filters
 
 	protected function name()
 	{
-		return $this->builder->orderBy('title','asc');
+		return $this->builder->join('departments', 'departments.id','=','ideas.department_id')
+				->orderBy('departments.description', 'asc');
 	}
 
 	protected function id($param)

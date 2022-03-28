@@ -67,4 +67,9 @@ class Idea extends Model
         return $this->comments()->count();
     }
 
+    public function department()
+    {
+        return $this->belongsTo(Department::class)->orderBy('description', 'asc');
+    }
+
 }

@@ -103,5 +103,10 @@ class User extends Authenticatable
     public function isOwner()
     {
         return $this->id == auth()->id() ? true : false;
+    }    
+
+    public function isManager()
+    {
+        return $this->role == 1 ? true : false;
     }
 }
