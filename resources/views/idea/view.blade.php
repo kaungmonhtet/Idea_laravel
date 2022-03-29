@@ -18,7 +18,7 @@
                     </p>
                      @foreach($idea->comments as $comment)
                         <div class="display-comment">
-                            <strong>{{ $comment->annonymous == true ? "Anonymous" : $comment->user->full_name }}</strong><br>
+                            <strong>{{ ($comment->annonymous == true && Auth::user()->isStaff() && !$comment->user->isOwner()) ? "Anonymous" : $comment->user->full_name }}</strong><br>
 
                                 <span>{{ $comment->description }}</span> &nbsp; 
                                 @if(auth()->id() == $comment->user_id)
@@ -26,7 +26,7 @@
                                 @endif
                                 
                        
-                        </div>
+                        </div><br>
                     @endforeach
                     @if(!$closure_check)
                     <hr />
