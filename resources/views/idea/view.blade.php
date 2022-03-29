@@ -12,13 +12,13 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    <p><b>{{ $idea->title }} Created By {{ $idea->annonymous == true ? "Anonymous" : $idea->createdByUser()}}</b></p>
+                    <p><b>{{ $idea->title }} Created By {{ $idea->annonymous == true && !$idea->user->isOwner()? "Anonymous" : $idea->createdByUser()}}</b></p>
                     <p>
                         {{ $idea->description }}
                     </p>
                      @foreach($idea->comments as $comment)
                         <div class="display-comment">
-                            <strong>{{ ($comment->annonymous == true && Auth::user()->isStaff() && !$comment->user->isOwner()) ? "Anonymous" : $comment->user->full_name }}</strong><br>
+                            <strong>{{ ($comment->annonymous == true && Auth::user()->isStaff() && !$comment->user->isOwner()) ? "Anonymous" : $comment->commenttedByUser() }}</strong><br>
 
                                 <span>{{ $comment->description }}</span> &nbsp; 
                                 @if(auth()->id() == $comment->user_id)

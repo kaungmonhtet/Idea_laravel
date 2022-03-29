@@ -104,7 +104,7 @@
                                 <div class="form-check">
                                     
                                 <input type="checkbox" name="term" id="term" class="form-check-input"/>
-                                <label for="term" class="form-check-label">{{ __('Terms & Conditions') }}</label>
+                                <label for="term" class="form-check-label">{{ __('Agree to Terms & Conditions') }}</label>
                                 </div>
 
                             </div>

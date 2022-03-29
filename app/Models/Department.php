@@ -28,7 +28,7 @@ class Department extends Model
     {
         $count = 0;
         foreach ($users as $key => $user) {
-            $count += ($this->ideaCount($user) || $this->commentCount($user) || $this->reactionCount($user)) ? $count + 1 : 0 ;
+            $count += ($this->ideaCount($user) || $this->commentCount($user) || $this->reactionCount($user)) ? 1 : 0 ;
 
         }
         return $count;

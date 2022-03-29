@@ -18,6 +18,11 @@ class Comment extends Model
 
     public function commenttedByUser()
     {
-        return $this->user->full_name;
+        return $this->user->full_name. $this->anonymous();
+    }
+
+    public function anonymous()
+    {
+        return $this->annonymous == true && !auth()->user()->isStaff() ? ' as Anonymous' : '';
     }
 }

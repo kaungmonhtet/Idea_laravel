@@ -34,7 +34,12 @@ class Idea extends Model
 
     public function createdByUser()
     {
-        return $this->user->full_name;
+        return $this->user->full_name. $this->anonymous();
+    }
+
+    public function anonymous()
+    {
+        return $this->annonymous == true && !auth()->user()->isStaff() ? ' as Anonymous' : '';
     }
 
     public function academic()
