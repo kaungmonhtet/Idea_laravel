@@ -37,7 +37,7 @@ class IdeaFilter extends Filters
 	protected function name()
 	{
 		return $this->builder->join('departments', 'departments.id','=','ideas.department_id')
-				->orderBy('departments.description', 'asc');
+				->orderBy('departments.code', 'asc');
 	}
 
 	protected function id($param)

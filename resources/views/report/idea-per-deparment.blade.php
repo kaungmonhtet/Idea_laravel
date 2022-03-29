@@ -43,7 +43,7 @@
                 <td>{{ $department->description }}</td>
                 <td>{{ $department->idea_count }}</td>
                 <td>{{ $department->idea_count/100 }}</td>
-                <td>{{ $department->getCount($department->user) + $department->idea_count }}</td>
+                <td>{{ $department->getCount($department->user) }}</td>
 
             </tr>
             @endforeach

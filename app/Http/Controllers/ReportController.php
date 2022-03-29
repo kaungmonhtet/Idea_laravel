@@ -13,26 +13,26 @@ class ReportController extends Controller
     public function __construct ()
     {
         $this->header = array('Content-Type:application/vnd.ms-excel');
+        $this->file_name = now()->toDateString()."-".rand(111,999).".csv";
     }
+
     public function ideaPerDepartment(Request $request)
     {
         $departments = Department::withCount('idea')->paginate(10);
-        // $departments = Department::where('id',2)->withCount('idea')->paginate(10);
 
         if ($request->btn == 'export') {
 
             $departments = Department::withCount('idea')->get();
 
             if ($departments->count() > 0) {
-                $file_name = now()->toDateString().".csv";
-
-                $list[0] = "No,Department Code,Department Name,Idea Count, Percentage";
+                $file_name = $this->file_name;
+                $list[0] = "No,Department Code,Department Name,Idea Count, Percentage, Contributor Count";
 
                 foreach ($departments as $key => $department) {
 
                     $percentage = ($department->idea_count / 100);
 
-                    $list[$key + 1] = ($key +1).","."{$department->code}, {$department->description}, {$department->idea_count}, {$percentage}";
+                    $list[$key + 1] = ($key +1).","."{$department->code}, {$department->description}, {$department->idea_count}, {$percentage}, {$department->getCount($department->user)}";
                 }
 
                 $this->export($list, $file_name);
@@ -53,8 +53,7 @@ class ReportController extends Controller
             $ideas = Idea::doesnthave('comments')->get();
 
             if ($ideas->count() > 0) {
-                $file_name = now()->toDateString().".csv";
-
+                $file_name = $this->file_name;
                 $list[0] = "No,Title,Description,View Count,Created By";
 
                 foreach ($ideas as $key => $idea) {
@@ -81,8 +80,7 @@ class ReportController extends Controller
             $ideas = Idea::where('annonymous',1)->get();
 
             if ($ideas->count() > 0) {
-                $file_name = now()->toDateString().".csv";
-
+                $file_name = $this->file_name;
                 $list[0] = "No,Title,Description,View Count,Created By";
 
                 foreach ($ideas as $key => $idea) {
@@ -110,7 +108,7 @@ class ReportController extends Controller
             $comments = Comment::where('annonymous',1)->get();
 
             if ($comments->count() > 0) {
-                $file_name = now()->toDateString().".csv";
+                $file_name = $this->file_name;
 
                 $list[0] = "No,Commentted By,Description";
 

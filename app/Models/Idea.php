@@ -59,7 +59,7 @@ class Idea extends Model
 
     public function unlikeCount()
     {
-        return $this->reactions()->where('up_down',0)->count();
+        return $this->reactions()->where('up_down',2)->count();
     }    
 
     public function commentCount()

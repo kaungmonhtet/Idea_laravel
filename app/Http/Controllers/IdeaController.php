@@ -205,7 +205,7 @@ class IdeaController extends Controller
     {
         $zip = new ZipArchive;
    
-        $fileName = 'myfile.zip';
+        $fileName = now()->toDateString()."-".rand(111,999).'.zip';
         $ideas = Idea::whereHas('academic', function ($query) {
                                 $query->where('final_closure_date', '<', now()->toDateString());
                             })->get();

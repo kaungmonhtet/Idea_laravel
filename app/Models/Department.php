@@ -28,18 +28,24 @@ class Department extends Model
     {
         $count = 0;
         foreach ($users as $key => $user) {
-            $count += $this->commentCount($user) + $this->reactionCount($user);
+            $count += ($this->ideaCount($user) || $this->commentCount($user) || $this->reactionCount($user)) ? $count + 1 : 0 ;
+
         }
         return $count;
     }
 
     public function commentCount($user)
     {
-        return $user->comment ? $user->comment->count() : 0;
+        return $user->comment ? true : false;
+    }    
+
+    public function ideaCount($user)
+    {
+        return !$user->ideas->isEmpty() ? true : false;
     }
 
     public function reactionCount($user)
     {
-        return $user->reaction ? $user->reaction->count() : 0;
+        return $user->reaction ? true : false;
     }
 }
