@@ -30,7 +30,7 @@
             </div>
         @endif
         <table class="table table-bordered mt-4" id="category_list">
-            <tr>
+            <tr class="btn-primary">
                 <th>No</th>
                 <th>Name</th>
                 <th>Description</th>
@@ -57,7 +57,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
-            <div class="modal-header">
+            <div class="modal-header text-white bg-primary mb-3">
                 <h4 class="modal-title">Add New Category</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
@@ -90,7 +90,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
-                <div class="modal-header">
+                <div class="modal-header text-white bg-primary mb-3">
                     <h4 class="modal-title">Edit Category</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>

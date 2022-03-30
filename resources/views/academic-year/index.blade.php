@@ -30,7 +30,7 @@
             </div>
         @endif
         <table class="table table-bordered mt-4" id="academic_list">
-            <tr>
+            <tr class="btn-primary">
                 <th>No</th>
                 <th>Academic Year</th>
                 <th>Start Date</th>
@@ -64,7 +64,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
-            <div class="modal-header">
+            <div class="modal-header text-white bg-primary mb-3">
                 <h4 class="modal-title">Add New Academic Year</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
@@ -109,7 +109,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
-                <div class="modal-header">
+                <div class="modal-header text-white bg-primary mb-3">
                     <h4 class="modal-title">Edit Academic Year</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
@@ -238,7 +238,8 @@
                     });
                     $("#editModal").modal('hide');
                     $("#EditformData")[0].reset();
-                    $("#academic_list").load(window.location + " #academic_list");
+                    setTimeout(function(){location.reload()}, 2200);
+                    //$("#academic_list").load(window.location + " #academic_list");
                 }
             });
             

@@ -21,7 +21,7 @@
             </div>
     <div class="col-lg-8 margin-tb">
         <table  class="table table-bordered mt-4">
-            <thead>
+            <thead class="btn-primary">
                 <th>ID</th>
                 <th>Title</th>
                 <th>Created By</th>

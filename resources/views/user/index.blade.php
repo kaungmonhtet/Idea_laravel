@@ -29,7 +29,7 @@
             </div>
         @endif
         <table class="table table-bordered mt-4" id="user_list">
-            <tr>
+            <tr class="btn-primary">
                 <th>No</th>
                 <th>Full Name</th>
                 <th>Email</th>

@@ -8,7 +8,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header text-white bg-primary mb-3">{{ __('Register') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register.custom') }}">
@@ -18,7 +18,7 @@
                             <label for="department_id" class="col-md-4 col-form-label text-md-end">{{ __('Department ID') }}</label>
 
                             <div class="col-md-6">
-                                <select id="department_id" type="text" class="form-control @error('department_id') is-invalid @enderror" name="department_id" value="{{ old('department_id') }}" required autocomplete="department_id" autofocus>
+                                <select id="department_id" type="text" class="form-control form-select @error('department_id') is-invalid @enderror" name="department_id" value="{{ old('department_id') }}" required autocomplete="department_id" autofocus>
                                     <option value="">Select One</option>
                                     @foreach($departments as $dept)
                                     <option value="{{$dept->id}}">{{$dept->code}}</option>
@@ -37,7 +37,7 @@
                             <label for="role" class="col-md-4 col-form-label text-md-end">{{ __('Role') }}</label>
 
                             <div class="col-md-6">
-                                <select id="role" type="text" class="form-control @error('role') is-invalid @enderror" name="role" value="{{ old('role') }}" required autocomplete="role" autofocus>
+                                <select id="role" type="text" class="form-control form-select @error('role') is-invalid @enderror" name="role" value="{{ old('role') }}" required autocomplete="role" autofocus>
                                     <option value="">Select One</option>
                                     <option value="1">Quality Assurance Manager</option>
                                     <option value="2">QA coordinator</option>
@@ -58,7 +58,7 @@
                             <label for="staff_type" class="col-md-4 col-form-label text-md-end">{{ __('Staff Type') }}</label>
 
                             <div class="col-md-6">
-                                <select id="staff_type" type="text" class="form-control @error('staff_type') is-invalid @enderror" name="staff_type" value="{{ old('staff_type') }}" autocomplete="staff_type" autofocus>
+                                <select id="staff_type" type="text" class="form-select form-control @error('staff_type') is-invalid @enderror" name="staff_type" value="{{ old('staff_type') }}" autocomplete="staff_type" autofocus>
                                     <option value="">Select One</option>
                                     <option value="1">Academic</option>
                                     <option value="2">Support</option>
@@ -76,7 +76,7 @@
                             <label for="gender" class="col-md-4 col-form-label text-md-end">{{ __('Gender') }}</label>
 
                             <div class="col-md-6">
-                                <select id="gender" type="text" class="form-control @error('gender') is-invalid @enderror" name="gender" value="{{ old('gender') }}" required autocomplete="gender" autofocus>
+                                <select id="gender" type="text" class="form-control form-select @error('gender') is-invalid @enderror" name="gender" value="{{ old('gender') }}" required autocomplete="gender" autofocus>
                                     <option value="">Select One</option>
                                     <option value="1">Male</option>
                                     <option value="2">Female</option>

@@ -21,12 +21,12 @@
 <div class="row justify-content-center">
             <div class="col-md-8 text-end mt-4">
                 <form action="{{route('anonymous-comment')}}" method="get">
-                <button type="submit" name="btn" class="btn btn-success" value="export">Excel Export</button> 
+                <button type="submit" name="btn" class="btn btn-primary" value="export">Excel Export</button> 
             </form>
             </div>
     <div class="col-lg-8 margin-tb">
         <table class="table table-bordered mt-4" id="department_list">
-            <tr>
+            <tr class="btn-primary">
                 <th>No</th>
                 <th>Description</th>
                 <th>Commentted By</th>

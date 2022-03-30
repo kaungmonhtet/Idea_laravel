@@ -14,17 +14,18 @@
             </div>
             <div class="col-md-12 text-end mt-4">
                 <form action="{{route('ideas.index')}}" method="get">
-                    <select name="category_id" onchange="this.form.submit()" class="col-form-label m-1 float-left">
+                    <div class="col-form-label float-left">
+                    <select class="form-select" name="category_id" onchange="this.form.submit()" >
                       <option value="all">All</option>
                       <option value="name" {{request("category_id") == "name" ? 'selected' : ''}}>Department Name</option>
                       <option value="asc" {{request('category_id') == "asc" ? 'selected' : ''}}>Latest</option>
                       <option value="desc" {{request('category_id') == "desc" ? 'selected' : ''}}>Newest</option>
                       <option value="like" {{request('category_id') == "like" ? 'selected' : ''}}>Most Liked</option>
                       <option value="comment" {{request('category_id') == "comment" ? 'selected' : ''}}>Most Comment</option>
-                      
                     </select>
+                    </div>
                 </form>
-                <a class="btn btn-primary m-1 float-right" href="{{ route('ideas.create') }}"><i class="fa fa-plus"></i> Add New Idea</a>
+                <a class="btn btn-primary m-2 float-right" href="{{ route('ideas.create') }}"><i class="fa fa-plus"></i> Add New Idea</a>
             </div>
         </div>
     </div>
@@ -32,7 +33,7 @@
 <div class="row justify-content-center">
     <div class="col-lg-8 margin-tb">
             <table class="table table-bordered mt-4">
-                <thead>
+                <thead class="text-white bg-primary mb-3">
                     <th>ID</th>
                     <th>Department</th>
                     <th>Title</th>
@@ -41,7 +42,7 @@
                     <th>Like Count</th>
                     <th>Unlike Count</th>
                     <th>Comments Count</th>
-                    <th>Action</th>
+                    <th class="w-25">Action</th>
                 </thead>
                 <tbody>
                 @foreach($ideas as $key => $idea)

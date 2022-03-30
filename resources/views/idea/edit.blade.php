@@ -9,7 +9,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Edit Idea</div>
+                <div class="card-header text-white bg-primary mb-3">Edit Idea</div>
                 <div class="card-body">
                             @if ($message = Session::get('error'))
                     <div class="alert alert-danger mt-3 alert-flash">
@@ -24,7 +24,7 @@
                             <label for="category_id" class="col-md-3 col-form-label">{{ __('Category') }}</label>
 
                             <div class="col-md-6">
-                                <select id="category_id" type="text" class="form-control @error('category_id') is-invalid @enderror" name="category_id" value="{{ old('category_id') }}" required autocomplete="category_id" autofocus>
+                                <select id="category_id" type="text" class="form-control form-select @error('category_id') is-invalid @enderror" name="category_id" value="{{ old('category_id') }}" required autocomplete="category_id" autofocus>
                                     <option value="">Select One</option>
                                     @foreach($categories as $category)
                                         <option value="{{$category->id}}" {{$category->id == $idea->category_id ? 'selected' : ''}}>{{$category->description}}</option>
@@ -53,7 +53,7 @@
                             <label for="academic_year_id" class="col-md-3 col-form-label">{{ __('Academic Year') }}</label>
 
                             <div class="col-md-6">
-                                <select id="academic_year_id" type="text" class="form-control @error('academic_year_id') is-invalid @enderror" name="academic_year_id" value="{{ old('academic_year_id') }}" autocomplete="academic_year_id" disabled>
+                                <select id="academic_year_id" type="text" class="form-control form-select @error('academic_year_id') is-invalid @enderror" name="academic_year_id" value="{{ old('academic_year_id') }}" autocomplete="academic_year_id" disabled>
                                     <option value="">Select One</option>
                                     @foreach($academic_years as $year)
                                         <option value="{{$year->id}}" {{$year->id == $idea->academic_year_id ? 'selected' : ''}}>{{$year->academic_year}}</option>
@@ -111,7 +111,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="submit" class="btn btn-success save" />
+                            <input type="submit" class="btn btn-success save" value="Submit"/>
                         </div>
                     </form>
                 </div>
