@@ -11,8 +11,8 @@
             <div class="card">
                 <div class="card-header text-white bg-primary mb-3">Edit Idea</div>
                 <div class="card-body">
-                            @if ($message = Session::get('error'))
-                    <div class="alert alert-danger mt-3 alert-flash">
+                @if ($message = Session::get('success'))
+                    <div class="alert alert-success mt-3 alert-flash">
                         <span>{{ $message }}</span>
                     </div>
                 @endif

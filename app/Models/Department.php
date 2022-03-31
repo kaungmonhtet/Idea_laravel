@@ -34,6 +34,16 @@ class Department extends Model
         return $count;
     }
 
+    public function contributorCount()
+    {
+        return $this->getCount($this->user);
+    }    
+
+    public function uncontributorCount()
+    {
+        return $this->user->count() - $this->getCount($this->user);
+    }
+
     public function commentCount($user)
     {
         return $user->comment ? true : false;

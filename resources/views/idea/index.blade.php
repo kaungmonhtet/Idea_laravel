@@ -6,6 +6,11 @@
 @section('content')
 <div class="row justify-content-center">
     <div class="col-lg-8 margin-tb">
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success mt-3 alert-flash">
+                <span>{{ $message }}</span>
+            </div>
+        @endif
         <div class="row">
             <div class="col-md-12">
                 <div class="text-center mt-5">
