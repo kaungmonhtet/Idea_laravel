@@ -7,6 +7,11 @@
 <div class="container">
     <div class="row justify-content-center">
             <div class="col-md-8 text-end mt-4">
+                                @if ($message = Session::get('error'))
+                    <div class="alert alert-danger mt-3 alert-flash">
+                        <span>{{ $message }}</span>
+                    </div>
+                @endif
                 <a class="btn btn-primary m-2 float-right" href="{{ route('ideas.index') }}"><i class="fa fa-arrow-left"></i> Back To List</a>
             </div>
         <div class="col-md-8">

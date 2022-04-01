@@ -11,6 +11,12 @@
                 <span>{{ $message }}</span>
             </div>
         @endif
+
+                        @if ($message = Session::get('error'))
+                    <div class="alert alert-danger mt-3 alert-flash">
+                        <span>{{ $message }}</span>
+                    </div>
+                @endif
         <div class="row">
             <div class="col-md-12">
                 <div class="text-center mt-5">

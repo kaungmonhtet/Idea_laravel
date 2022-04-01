@@ -16,6 +16,12 @@
                         <span>{{ $message }}</span>
                     </div>
                 @endif
+
+                @if ($message = Session::get('error'))
+                    <div class="alert alert-danger mt-3 alert-flash">
+                        <span>{{ $message }}</span>
+                    </div>
+                @endif
                     <form method="post" action="{{ route('ideas.store') }}" enctype="multipart/form-data">
                         @csrf
 
